@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react'
+import React, {useEffect, useReducer} from 'react'
 import './App.css'
 import './styles.css'
 import DigitButton from './DigitButton'
@@ -46,6 +46,7 @@ const formatOperand = operand => {
   }
   return `${INTEGER_FORMATTER.format(integer)}.${decimal}`
 }
+
 const reducer = (state, {type, payload}) => {
   switch (type) {
     case ACTIONS.ADD_DIGIT:
@@ -176,8 +177,17 @@ const App = () => {
     }
   }
 
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown)
+    document.addEventListener('keypress', handleKeyPress)
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown)
+      document.removeEventListener('keypress', handleKeyPress)
+    }
+  }, [])
+
   return (
-    <div onKeyDown={handleKeyDown} onKeyPress={handleKeyPress}>
+    <div>
       <div className='calculator-grid'>
         <div className='output'>
           <div className='previous-operand'>{formatOperand(previousOperand)} {operation}</div>
