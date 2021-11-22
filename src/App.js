@@ -167,7 +167,7 @@ const App = () => {
       dispatch({ type: ACTIONS.CHOOSE_OPERATION, payload: { operation: '-' } })
       return
     }
-    console.log('CHARCODE', evt.code, evt.key)
+
   }
 
   const handleKeyPress = evt => {
