@@ -135,7 +135,7 @@ const App = () => {
   const [{currentOperand, previousOperand, operation}, dispatch] = useReducer(reducer, {})
 
   const handleKeyDown = evt => {
-    if (!isNaN(evt.key)) {
+    if (!isNaN(evt.key) || evt.code === 'Period') {
       dispatch({ type: ACTIONS.ADD_DIGIT, payload: { digit: evt.key }})
       return
     }
